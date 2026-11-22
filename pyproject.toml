@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tidycsv-ar"
+dynamic = ["version"]
+description = "Inspect and clean messy CSV files: encodings, delimiters, Argentine number and date formats, duplicates."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Nicolás Ezequiel Ricciardi" }]
+keywords = ["csv", "data-cleaning", "cli", "argentina"]
+classifiers = [
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = ["typer>=0.12", "rich>=13"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.7", "build>=1.2"]
+
+[project.scripts]
+tidycsv = "tidycsv.cli:app"
+
+[project.urls]
+Repository = "https://github.com/Nack34/tidycsv"
+
+[tool.hatch.version]
+path = "src/tidycsv/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tidycsv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
